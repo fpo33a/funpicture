@@ -61,27 +61,29 @@ direction="horizontal"
 # loop on all characters of thte data string
 for char in data_string:
   bin_val = get_binary_array (ord(char))
+  index=0
   for bit in range(start,stop,step):
     if bin_val[bit] == 1:
       if direction=="horizontal":
-        x=small_rect_hoffset+(bit*(small_rect_width+5))
+        x=small_rect_hoffset+(index*(small_rect_width+5))
         y=small_rect_voffset
       else:
         x=small_rect_hoffset
-        y=small_rect_voffset+(bit*(small_rect_height+5))
-      print (char," ",ord(char)," x= ",x," y=",y)
+        y=small_rect_voffset+(index*(small_rect_height+5))
+      print (char," ",ord(char),"1 x= ",x," y=",y)
       rect = patches.Rectangle((x, y), small_rect_width, small_rect_height_1, linewidth=1, edgecolor='grey', facecolor='grey')
     else:
       if direction=="horizontal":
-        x=small_rect_hoffset+(bit*(small_rect_width+5))
+        x=small_rect_hoffset+(index*(small_rect_width+5))
         y=small_rect_voffset+(small_rect_height_1-small_rect_height_0)
       else:
         x=small_rect_hoffset
-        y=small_rect_voffset+(bit*(small_rect_height+5))
-      print (char," ",ord(char)," x= ",x," y=",y)
+        y=small_rect_voffset+(index*(small_rect_height+5))
+      print (char," ",ord(char),"0 x= ",x," y=",y)
       rect = patches.Rectangle((x, y), small_rect_width, small_rect_height_0, linewidth=1, edgecolor='grey', facecolor='grey')
     # Add the patch to the Axes
     ax.add_patch(rect)
+    index=index+1
   char_position=char_position+1
   # two first characters on top, from left to right
   if char_position <= 2:
